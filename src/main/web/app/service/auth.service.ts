@@ -1,22 +1,29 @@
-import { User } from './../class/user';
-import { Injectable, Output, EventEmitter } from '@angular/core';
+import {User} from "./../class/user";
+import {Injectable, Output, EventEmitter} from "@angular/core";
+import {HttpService} from "./http.service";
 
 @Injectable()
 export class AuthService {
 
   @Output()
   public userUpdated = new EventEmitter<User>();
+  session: string;
 
-  constructor() {
+  constructor(private _http: HttpService) {
     this.userUpdated.emit(this.getUser());
   }
 
   login(userName: string, password: string, remembered: boolean = false) {
-    let user = new User();
-    user.name = userName;
-    let data = JSON.stringify(user);
-    this.setUserData(data, remembered);
-    this.userUpdated.emit(user);
+    let user: User;
+    this._http.token = 'Basic ' + btoa(userName + ':' + password);
+    return this._http.get('/user')
+      .map(res => {
+        user = res.json();
+        let data = JSON.stringify(user);
+        this.setUserData(data, remembered);
+        this.userUpdated.emit(user);
+        return user;
+      });
   }
 
   logout() {

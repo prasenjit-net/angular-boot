@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   userName: string = 'user';
   password: string = 'user';
   remembered: boolean;
+  error:any;
 
   constructor(private router: Router, private auth: AuthService) { }
 
@@ -22,12 +23,17 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.auth.login(this.userName, this.password, this.remembered);
-    let route = sessionStorage.getItem('nextRoute');
-    if (route) {
-      this.router.navigateByUrl(route);
-    } else {
-      this.router.navigateByUrl('');
-    }
+    this.auth.login(this.userName, this.password, this.remembered)
+      .subscribe(d=> {
+        let route = sessionStorage.getItem('nextRoute');
+        if (route) {
+          this.router.navigateByUrl(route);
+        } else {
+          this.router.navigateByUrl('');
+        }
+      },
+      e=>{
+        this.error = e.json();
+      });
   }
 }

@@ -1,19 +1,18 @@
-import { AuthService } from './service/auth.service';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-
-import { AlertModule } from 'ng2-bootstrap';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NavComponent } from './nav/nav.component';
-import { FooterComponent } from './footer/footer.component';
-import { HomeComponent } from './view/home/home.component';
-import { NotFoundComponent } from './view/not-found/not-found.component';
-import { LoginComponent } from './login/login.component';
-import { AuthGuard } from './guard/auth.guard';
+import {AuthService} from "./service/auth.service";
+import {BrowserModule} from "@angular/platform-browser";
+import {NgModule} from "@angular/core";
+import {FormsModule} from "@angular/forms";
+import {HttpModule} from "@angular/http";
+import {AlertModule} from "ng2-bootstrap";
+import {AppRoutingModule} from "./app-routing.module";
+import {AppComponent} from "./app.component";
+import {NavComponent} from "./nav/nav.component";
+import {FooterComponent} from "./footer/footer.component";
+import {HomeComponent} from "./view/home/home.component";
+import {NotFoundComponent} from "./view/not-found/not-found.component";
+import {LoginComponent} from "./login/login.component";
+import {AuthGuard} from "./guard/auth.guard";
+import {HttpService} from "./service/http.service";
 
 @NgModule({
   declarations: [
@@ -31,7 +30,8 @@ import { AuthGuard } from './guard/auth.guard';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [AuthGuard, AuthService],
+  providers: [AuthGuard, AuthService, HttpService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
