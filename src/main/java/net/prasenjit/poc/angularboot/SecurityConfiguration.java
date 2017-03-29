@@ -13,13 +13,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @Order(value = SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-  @Override
-  public void configure(WebSecurity web) throws Exception {
-    super.configure(web);
-  }
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    super.configure(http);
+    http.httpBasic().and().formLogin().loginPage("/")
+      .and().csrf().disable()
+      .authorizeRequests()
+      .antMatchers("/", "/*.js", "/*.ttf","/*.woff","/*.woff2","/*.svg").permitAll()
+      .anyRequest().fullyAuthenticated();
   }
 }
