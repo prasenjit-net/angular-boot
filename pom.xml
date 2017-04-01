@@ -60,6 +60,10 @@
         <directory>target/gui</directory>
         <targetPath>static</targetPath>
       </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <targetPath>.</targetPath>
+      </resource>
     </resources>
     <plugins>
       <plugin>
@@ -100,7 +104,7 @@
             <goals>
               <goal>yarn</goal>
             </goals>
-            <phase>prepare-package</phase>
+            <phase>generate-resources</phase>
             <configuration>
               <!-- optional: The default argument is actually
               "install", so unless you need to run some other yarn command,
@@ -114,7 +118,7 @@
           <nodeVersion>v7.5.0</nodeVersion>
           <yarnVersion>v0.21.3</yarnVersion>
 
-          <installDirectory>target/node</installDirectory>
+          <installDirectory>target</installDirectory>
         </configuration>
       </plugin>
     </plugins>

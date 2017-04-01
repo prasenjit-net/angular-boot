@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Http, RequestOptionsArgs, Request, Response, Headers} from "@angular/http";
-import {Observable} from "rxjs";
+
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class HttpService {

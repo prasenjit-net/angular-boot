@@ -2,6 +2,10 @@ import {User} from "./../class/user";
 import {Injectable, Output, EventEmitter} from "@angular/core";
 import {HttpService} from "./http.service";
 
+import {Observable} from "rxjs/Observable";
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/catch";
+
 @Injectable()
 export class AuthService {
 
@@ -29,7 +33,8 @@ export class AuthService {
   logout() {
     sessionStorage.removeItem('currentUser');
     localStorage.removeItem('currentUser');
-    this.userUpdated.emit(null);
+    return this._http.post('/logout', {})
+      .subscribe(d => this.userUpdated.emit(null));
   }
 
   isLoggedIn() {

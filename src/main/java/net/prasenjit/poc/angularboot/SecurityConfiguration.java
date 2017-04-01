@@ -6,6 +6,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
 /**
@@ -20,6 +21,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     http.httpBasic()
       .authenticationEntryPoint(authEntry()).and().formLogin().loginPage("/")
       .and().csrf().disable()
+//      .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+      .logout().logoutSuccessHandler((request, response, authentication) -> response.setStatus(200)).and()
       .authorizeRequests()
       .antMatchers("/", "/*.js", "/*.ttf","/*.woff","/*.woff2","/*.svg").permitAll()
       .anyRequest().fullyAuthenticated();
