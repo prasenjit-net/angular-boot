@@ -24,7 +24,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //      .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
       .logout().logoutSuccessHandler((request, response, authentication) -> response.setStatus(200)).and()
       .authorizeRequests()
-      .antMatchers("/", "/*.js", "/*.ttf","/*.woff","/*.woff2","/*.svg").permitAll()
+      .antMatchers("/", "/*.js", "/*.css", "/*.ttf","/*.woff","/*.woff2","/*.svg").permitAll()
       .anyRequest().fullyAuthenticated();
   }
 

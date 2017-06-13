@@ -116,7 +116,7 @@
         </executions>
         <configuration>
           <nodeVersion>v7.5.0</nodeVersion>
-          <yarnVersion>v0.21.3</yarnVersion>
+          <yarnVersion>v0.23.2</yarnVersion>
 
           <installDirectory>target</installDirectory>
         </configuration>
